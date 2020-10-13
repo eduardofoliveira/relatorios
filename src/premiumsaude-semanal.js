@@ -53,11 +53,15 @@ const execute = async () => {
     }
   })
 
+  console.log(resultWeekDetails)
+
   const resultWeek = await callCountRepository.showByDomain({
     domain: 'premiumsaude.cloudcom.com.br',
     start,
     end
   })
+
+  console.log(resultWeek)
 
   const semanal = xlsx.utils.json_to_sheet(resultWeek)
   const details = xlsx.utils.json_to_sheet(resultWeekDetails)

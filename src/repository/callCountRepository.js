@@ -107,7 +107,7 @@ class callCountRepository {
         // console.log(`Chamada CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
       }else{
         if(DID === VCH_TARGET){
-          console.log(VCH_TO)
+          console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
         }
 
         if(status[`${VCH_TARGET}-${DID}`] === undefined){

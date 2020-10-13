@@ -32,7 +32,7 @@ class callCountRepository {
   }
 
   async showCallDetailByDomain({ domain, start, end }) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const status = {}
 

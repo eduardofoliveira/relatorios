@@ -14,11 +14,13 @@ const execute = async () => {
   let end = format(endOfWeek(lastWeek), 'dd-MM-yyyy HH:mm:ss')
 
   const callCountRepository = new CallCountRepository()
-  await callCountRepository.showCallDetailByDomain({
+  const status = await callCountRepository.showCallDetailByDomain({
     domain: 'premiumsaude.cloudcom.com.br',
      start,
      end
   })
+
+  console.log(status)
   // const resultWeek = await callCountRepository.showByDomain({
   //   domain: 'premiumsaude.cloudcom.com.br',
   //   start,

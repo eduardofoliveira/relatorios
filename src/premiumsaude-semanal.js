@@ -45,37 +45,46 @@ const execute = async () => {
     return 0
   })
 
-  console.log(lista)
-  // const resultWeek = await callCountRepository.showByDomain({
-  //   domain: 'premiumsaude.cloudcom.com.br',
-  //   start,
-  //   end
-  // })
+  resultWeekDetails = lista.map(item => {
+    return {
+      did: item[0],
+      onde_terminou: item[1],
+      quantidade: item[2]
+    }
+  })
 
-  // const semanal = xlsx.utils.json_to_sheet(resultWeek)
+  const resultWeek = await callCountRepository.showByDomain({
+    domain: 'premiumsaude.cloudcom.com.br',
+    start,
+    end
+  })
 
-  // const wb2 = xlsx.utils.book_new()
-  // xlsx.utils.book_append_sheet(wb2, semanal, 'Semanal')
+  const semanal = xlsx.utils.json_to_sheet(resultWeek)
+  const details = xlsx.utils.json_to_sheet(resultWeekDetails)
 
-  // const filename = `relatorio-premiumsaude-semanal ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')}.xlsx`
+  const wb2 = xlsx.utils.book_new()
+  xlsx.utils.book_append_sheet(wb2, semanal, 'Semanal')
+  xlsx.utils.book_append_sheet(wb2, details, 'Detalhes')
 
-  // xlsx.writeFile(wb2, `./${filename}`)
+  const filename = `relatorio-premiumsaude-semanal ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')}.xlsx`
 
-  // const corpo = `<p>Bom dia,<p>
-  //   <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
-  //   <p>Atenciosamente<p>
-  //   <p>Suporte Basix<p>`
+  xlsx.writeFile(wb2, `./${filename}`)
 
-  // await enviarEmail(
-  //   'eduardo_felipe_oliveira@yahoo.com.br',
-  //   `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
-  //   corpo,
-  //   filename
-  // )
+  const corpo = `<p>Bom dia,<p>
+    <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
+    <p>Atenciosamente<p>
+    <p>Suporte Basix<p>`
 
-  // fs.unlink(`./${filename}`, () => {
-  //   process.exit(0)
-  // })
+  await enviarEmail(
+    'eduardo_felipe_oliveira@yahoo.com.br',
+    `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
+    corpo,
+    filename
+  )
+
+  fs.unlink(`./${filename}`, () => {
+    process.exit(0)
+  })
 }
 
 execute()

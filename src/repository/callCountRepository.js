@@ -69,7 +69,7 @@ class callCountRepository {
 
       //console.log({ VCH_CALLID, DID, INICIO, TERMINO })
 
-      const [{INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET}, penultimo] = await connection.raw(`
+      let [{INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET}, penultimo] = await connection.raw(`
         select
           *
         from
@@ -80,6 +80,16 @@ class callCountRepository {
           int_connectionsequence
         desc
       `)
+
+      if(DID === VCH_TARGET){
+        // console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
+        // console.log(penultimo)
+        // console.log('')
+
+        VCH_TARGET = penultimo.VCH_TARGET
+        VCH_TO = penultimo.VCH_TO
+        INT_CONNECTIONSEQUENCE = penultimo.INT_CONNECTIONSEQUENCE
+      }
 
       if(VCH_TO === 'Transbordo' && INT_CONNECTIONSEQUENCE === 2){
         if(status[`transbordo-${DID}`] === undefined){
@@ -106,12 +116,6 @@ class callCountRepository {
 
         // console.log(`Chamada CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
       }else{
-        if(DID === VCH_TARGET){
-          console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
-          console.log(penultimo)
-          console.log('')
-        }
-
         if(status[`${VCH_TARGET}-${DID}`] === undefined){
           status[`${VCH_TARGET}-${DID}`] = 1
         }

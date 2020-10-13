@@ -20,7 +20,32 @@ const execute = async () => {
      end
   })
 
-  console.log(status)
+  const lista = []
+  const keys = Object.keys(status)
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const [onde_parou , did] = key.split('-')
+    lista.push([did, onde_parou, status[key]])
+  }
+
+  lista = lista.sort((a, b) => {
+    if(a[0] > b[0]){
+      return - 1
+    }
+    if(a[0] < b[0]){
+      return 1
+    }
+    if(a[1] > b[1]){
+      return - 1
+    }
+    if(a[1] < b[1]){
+      return 1
+    }
+    return 0
+  })
+
+  console.log(lista)
   // const resultWeek = await callCountRepository.showByDomain({
   //   domain: 'premiumsaude.cloudcom.com.br',
   //   start,

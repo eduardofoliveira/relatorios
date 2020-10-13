@@ -81,11 +81,11 @@ class callCountRepository {
         desc
       `)
 
-      if(DID === VCH_TARGET){
-        // console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
-        // console.log(penultimo)
-        // console.log('')
+      if(VCH_TARGET === 'Eugenia'){
+        console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
+      }
 
+      if(DID === VCH_TARGET){
         VCH_TARGET = penultimo.VCH_TARGET
         VCH_TO = penultimo.VCH_TO
         INT_CONNECTIONSEQUENCE = penultimo.INT_CONNECTIONSEQUENCE

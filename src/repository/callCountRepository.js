@@ -69,7 +69,7 @@ class callCountRepository {
 
       //console.log({ VCH_CALLID, DID, INICIO, TERMINO })
 
-      const [{INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET}] = await connection.raw(`
+      const [{INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET}, penultimo] = await connection.raw(`
         select
           *
         from
@@ -108,6 +108,8 @@ class callCountRepository {
       }else{
         if(DID === VCH_TARGET){
           console.log({VCH_CALLID, DID, INT_CONNECTIONSEQUENCE, VCH_TO, VCH_TARGET})
+          console.log(penultimo)
+          console.log('')
         }
 
         if(status[`${VCH_TARGET}-${DID}`] === undefined){

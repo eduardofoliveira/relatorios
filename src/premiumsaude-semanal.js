@@ -20,7 +20,7 @@ const execute = async () => {
      end
   })
 
-  const lista = []
+  let lista = []
   const keys = Object.keys(status)
 
   for (let i = 0; i < keys.length; i++) {

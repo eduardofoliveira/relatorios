@@ -28,6 +28,13 @@ const execute = async () => {
     lista_parou_ura.push([key, parou_ura[key]])
   }
 
+  lista_parou_ura = lista_parou_ura.map(item => {
+    return {
+      ura: item[0],
+      quantidade: item[1]
+    }
+  })
+
   let lista = []
   const keys = Object.keys(status)
 

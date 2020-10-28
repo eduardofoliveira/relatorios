@@ -14,13 +14,19 @@ const execute = async () => {
   let end = format(endOfWeek(lastWeek), 'dd-MM-yyyy HH:mm:ss')
 
   const callCountRepository = new CallCountRepository()
-  const { status, parou_ura } = await callCountRepository.showCallDetailByDomain({
+  let { status, parou_ura } = await callCountRepository.showCallDetailByDomain({
     domain: 'premiumsaude.cloudcom.com.br',
      start,
      end
   })
 
-  console.log({ status, parou_ura })
+  let lista_parou_ura = []
+  const keys_parou_ura = Object.keys(parou_ura)
+
+  for (let i = 0; i < keys_parou_ura.length; i++) {
+    const key = keys_parou_ura[i];
+    lista_parou_ura.push([key, parou_ura[key]])
+  }
 
   let lista = []
   const keys = Object.keys(status)
@@ -65,9 +71,11 @@ const execute = async () => {
 
   console.log(resultWeek)
 
+
+
   const semanal = xlsx.utils.json_to_sheet(resultWeek)
   const details = xlsx.utils.json_to_sheet(resultWeekDetails)
-  const detailsParouUra = xlsx.utils.json_to_sheet(parou_ura)
+  const detailsParouUra = xlsx.utils.json_to_sheet(lista_parou_ura)
 
   const wb2 = xlsx.utils.book_new()
   xlsx.utils.book_append_sheet(wb2, semanal, 'Semanal')

@@ -141,11 +141,16 @@ class callCountRepository {
             }
             // console.log(`Chamada Fora do CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
           }
-          console.log(status)
-          console.log(parou_ura)
+          // console.log(status)
+          // console.log(parou_ura)
         }
 
-        resolve(status, parou_ura)
+        const retorno = {
+          status,
+          parou_ura
+        }
+
+        resolve(retorno)
       } catch (error) {
         reject(error)
       }

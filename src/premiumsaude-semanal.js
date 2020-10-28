@@ -20,6 +20,8 @@ const execute = async () => {
      end
   })
 
+  console.log({ status, parou_ura })
+
   let lista = []
   const keys = Object.keys(status)
 

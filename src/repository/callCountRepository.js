@@ -96,36 +96,39 @@ class callCountRepository {
           if(VCH_TO === 'Transbordo' && INT_CONNECTIONSEQUENCE === 2){
             if(status[`transbordo-${DID}`] === undefined){
               status[`transbordo-${DID}`] = 1
+            }else{
+              status[`transbordo-${DID}`] = status[`transbordo-${DID}`] + 1
             }
-
-            status[`transbordo-${DID}`] = status[`transbordo-${DID}`] + 1
-
             // console.log(`Transbordada transbordo-${DID} ${status[`transbordo-${DID}`]}`)
           }else if(VCH_TARGET === 'Transbordo' && INT_CONNECTIONSEQUENCE === 1){
             if(status[`transbordo-${DID}`] === undefined){
               status[`transbordo-${DID}`] = 1
+            }else{
+              status[`transbordo-${DID}`] = status[`transbordo-${DID}`] + 1
             }
-
-            status[`transbordo-${DID}`] = status[`transbordo-${DID}`] + 1
-
             // console.log(`Transbordada transbordo-${DID} ${status[`transbordo-${DID}`]}`)
           }else if(VCH_TO === 'acdGroupServer'){
             if(status[`${VCH_TARGET}-${DID}`] === undefined){
               status[`${VCH_TARGET}-${DID}`] = 1
+            }else{
+              status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
             }
-
-            status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
-
             // console.log(`Chamada CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
+          }else if(VCH_TARGET !== 'TransbordoRedeCall'){
+            if(status[`Parou na URA-${DID}`] === undefined){
+              status[`Parou na URA-${DID}`] = 1
+            }else{
+              status[`Parou na URA-${DID}`] = status[`Parou na URA-${DID}`] + 1
+            }
           }else{
             if(status[`${VCH_TARGET}-${DID}`] === undefined){
               status[`${VCH_TARGET}-${DID}`] = 1
+            }else{
+              status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
             }
-
-            status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
-
             // console.log(`Chamada Fora do CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
           }
+          console.log(status)
         }
 
         resolve(status)

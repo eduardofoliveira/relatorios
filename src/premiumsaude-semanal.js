@@ -74,21 +74,21 @@ const execute = async () => {
 
   xlsx.writeFile(wb2, `./${filename}`)
 
-  const corpo = `<p>Bom dia,<p>
-    <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
-    <p>Atenciosamente<p>
-    <p>Suporte Basix<p>`
+  // const corpo = `<p>Bom dia,<p>
+  //   <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
+  //   <p>Atenciosamente<p>
+  //   <p>Suporte Basix<p>`
 
-  await enviarEmail(
-    'eduardo_felipe_oliveira@yahoo.com.br',
-    `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
-    corpo,
-    filename
-  )
+  // await enviarEmail(
+  //   'eduardo_felipe_oliveira@yahoo.com.br',
+  //   `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
+  //   corpo,
+  //   filename
+  // )
 
-  fs.unlink(`./${filename}`, () => {
-    process.exit(0)
-  })
+  // fs.unlink(`./${filename}`, () => {
+  //   process.exit(0)
+  // })
 }
 
 execute()

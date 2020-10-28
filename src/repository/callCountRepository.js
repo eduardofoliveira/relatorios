@@ -125,10 +125,10 @@ class callCountRepository {
             if(status[`Parou na URA-${DID}`] === undefined){
               status[`Parou na URA-${DID}`] = 1
             }else{
-              if(parou_ura[VCH_TARGET] === undefined){
-                parou_ura[VCH_TARGET] = 1
+              if(parou_ura[`${VCH_TARGET}`] === undefined){
+                parou_ura[`${VCH_TARGET}`] = 1
               }else{
-                parou_ura[VCH_TARGET] = parou_ura[VCH_TARGET] + 1
+                parou_ura[`${VCH_TARGET}`] = parou_ura[`${VCH_TARGET}`] + 1
               }
               //console.log(VCH_TARGET)
               status[`Parou na URA-${DID}`] = status[`Parou na URA-${DID}`] + 1

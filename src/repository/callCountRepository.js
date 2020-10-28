@@ -35,6 +35,7 @@ class callCountRepository {
     return new Promise(async (resolve, reject) => {
       try {
         const status = {}
+        const parou_ura = {}
 
         const callsDetail = await connection.raw(`
           select
@@ -114,11 +115,22 @@ class callCountRepository {
               status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
             }
             // console.log(`Chamada CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
+          }else if(VCH_TARGET !== 'TPremium'){
+            if(status[`TPremium-${DID}`] === undefined){
+              status[`TPremium-${DID}`] = 1
+            }else{
+              status[`TPremium-${DID}`] = status[`TPremium-${DID}`] + 1
+            }
           }else if(VCH_TARGET !== 'TransbordoRedeCall'){
             if(status[`Parou na URA-${DID}`] === undefined){
               status[`Parou na URA-${DID}`] = 1
             }else{
-              console.log(VCH_TARGET)
+              if(parou_ura[VCH_TARGET] === undefined){
+                parou_ura[VCH_TARGET] = 1
+              }else{
+                parou_ura[VCH_TARGET] = parou_ura[VCH_TARGET] + 1
+              }
+              //console.log(VCH_TARGET)
               status[`Parou na URA-${DID}`] = status[`Parou na URA-${DID}`] + 1
             }
           }else{
@@ -130,6 +142,7 @@ class callCountRepository {
             // console.log(`Chamada Fora do CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
           }
           console.log(status)
+          console.log(parou_ura)
         }
 
         resolve(status)

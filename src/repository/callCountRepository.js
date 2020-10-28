@@ -118,6 +118,7 @@ class callCountRepository {
             if(status[`Parou na URA-${DID}`] === undefined){
               status[`Parou na URA-${DID}`] = 1
             }else{
+              console.log(VCH_TARGET)
               status[`Parou na URA-${DID}`] = status[`Parou na URA-${DID}`] + 1
             }
           }else{

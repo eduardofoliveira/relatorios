@@ -145,7 +145,7 @@ class callCountRepository {
           console.log(parou_ura)
         }
 
-        resolve(status)
+        resolve(status, parou_ura)
       } catch (error) {
         reject(error)
       }

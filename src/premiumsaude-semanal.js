@@ -14,7 +14,7 @@ const execute = async () => {
   let end = format(endOfWeek(lastWeek), 'dd-MM-yyyy HH:mm:ss')
 
   const callCountRepository = new CallCountRepository()
-  const status = await callCountRepository.showCallDetailByDomain({
+  const { status, parou_ura } = await callCountRepository.showCallDetailByDomain({
     domain: 'premiumsaude.cloudcom.com.br',
      start,
      end
@@ -65,30 +65,32 @@ const execute = async () => {
 
   const semanal = xlsx.utils.json_to_sheet(resultWeek)
   const details = xlsx.utils.json_to_sheet(resultWeekDetails)
+  const detailsParouUra = xlsx.utils.json_to_sheet(parou_ura)
 
   const wb2 = xlsx.utils.book_new()
   xlsx.utils.book_append_sheet(wb2, semanal, 'Semanal')
   xlsx.utils.book_append_sheet(wb2, details, 'Detalhes')
+  xlsx.utils.book_append_sheet(wb2, detailsParouUra, 'Desligaram na URA')
 
   const filename = `relatorio-premiumsaude-semanal ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')}.xlsx`
 
   xlsx.writeFile(wb2, `./${filename}`)
 
-  // const corpo = `<p>Bom dia,<p>
-  //   <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
-  //   <p>Atenciosamente<p>
-  //   <p>Suporte Basix<p>`
+  const corpo = `<p>Bom dia,<p>
+    <p>Segue em anexo relatório semanal das chamadas recebidas na PremiumSaude.<p>
+    <p>Atenciosamente<p>
+    <p>Suporte Basix<p>`
 
-  // await enviarEmail(
-  //   'eduardo_felipe_oliveira@yahoo.com.br',
-  //   `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
-  //   corpo,
-  //   filename
-  // )
+  await enviarEmail(
+    'eduardo_felipe_oliveira@yahoo.com.br',
+    `Relatorio Semanal - ${format(startOfWeek(lastWeek), 'dd-MM-yyyy')} ${format(endOfWeek(lastWeek), 'dd-MM-yyyy')} - PremiumSaude`,
+    corpo,
+    filename
+  )
 
-  // fs.unlink(`./${filename}`, () => {
-  //   process.exit(0)
-  // })
+  fs.unlink(`./${filename}`, () => {
+    process.exit(0)
+  })
 }
 
 execute()

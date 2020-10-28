@@ -115,7 +115,7 @@ class callCountRepository {
               status[`${VCH_TARGET}-${DID}`] = status[`${VCH_TARGET}-${DID}`] + 1
             }
             // console.log(`Chamada CallCenter ${VCH_TARGET}-${DID}: ${status[`${VCH_TARGET}-${DID}`]}`)
-          }else if(VCH_TARGET !== 'TPremium'){
+          }else if(VCH_TARGET === 'TPremium'){
             if(status[`TPremium-${DID}`] === undefined){
               status[`TPremium-${DID}`] = 1
             }else{

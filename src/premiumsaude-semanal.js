@@ -68,7 +68,7 @@ const execute = async () => {
     }
   })
 
-  console.log(resultWeekDetails)
+  // console.log(resultWeekDetails)
 
   const resultWeek = await callCountRepository.showByDomain({
     domain: 'premiumsaude.cloudcom.com.br',
@@ -76,7 +76,7 @@ const execute = async () => {
     end
   })
 
-  console.log(resultWeek)
+  // console.log(resultWeek)
 
 
 
